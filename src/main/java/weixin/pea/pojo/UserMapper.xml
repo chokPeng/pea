@@ -12,13 +12,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="userRegister"	parameterType="weixin.pea.pojo.User" >
 		insert into user (userId,userName,userPassword,userSex,userInfo,userAdress) values (#{userId},#{userName},#{userPassword},#{userSex},#{userInfo},#{userAdress})
 	</insert>
+	<update id="updateInfo" parameterType="weixin.pea.pojo.User">
+		update user set userName=#{userName},userSex=#{userSex},userInfo=#{userInfo} where userId=#{userId}
+	</update>
 	<!-- 
 	<delete id="deleteStudent"	parameterType="com.chokPeng.ssmLearning.pojo.Student" >
 		delete from student where studentId=#{studentId}
 	</delete>
-	<update id="updateStudent" parameterType="com.chokPeng.ssmLearning.pojo.Student">
-		update student set studentId=#{studentId},studentName=#{studentName},studentSex=#{studentSex},studentInfo=#{studentInfo} where studentId=#{studentId}
-	</update>
+
 	-->
 	<select id="getMovie" parameterType="weixin.pea.pojo.Movie" resultType="weixin.pea.pojo.Movie">
 		select * from movieDetail where movieName=#{movieName}
