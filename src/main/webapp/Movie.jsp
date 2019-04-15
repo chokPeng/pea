@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>学生操作页面</title>
+<title>查找电影页面</title>
 <body>
 <form action="./getMovie">
 电影名<input  name="movieName">
