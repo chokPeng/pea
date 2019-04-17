@@ -2,8 +2,13 @@ package weixin.pea.controller;
 
 
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +16,10 @@ import javax.servlet.http.HttpSession;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -25,7 +31,7 @@ public class UserController extends HttpServlet{
 	@Autowired
 	UserService userService;
 	//用户注册
-	@RequestMapping("/userRegister")
+	@RequestMapping(value="/userRegister",method=RequestMethod.POST)
 	public ModelAndView register(User user,HttpServletRequest request,HttpServletResponse response) {
 		HttpSession session=request.getSession();
 		User user1=(User) session.getAttribute("userLogin");
@@ -43,7 +49,7 @@ public class UserController extends HttpServlet{
 		}
 	}
 	//用户登录
-	@RequestMapping("/userLogin")
+	@RequestMapping(value="/userLogin",method=RequestMethod.POST)
 	public ModelAndView login(User user,HttpServletRequest request,HttpServletResponse response) {
 		User user1=userService.userLogin(user);
 		if(user1!=null) {
@@ -59,7 +65,8 @@ public class UserController extends HttpServlet{
 		}
 	}
 	//根据电影名查询电影
-	@RequestMapping("/getMovie")
+	@RequestMapping(value="/getMovie",method=RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView getMovie(Movie movie) {
 		System.out.println(movie.getMovieName());
 		Movie movie2=userService.getMovie(movie);
@@ -71,6 +78,20 @@ public class UserController extends HttpServlet{
 		}else {
 			return null;
 		}
+	}
+	@RequestMapping(value="/getMovie2",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getMovie2(Movie movie) {
+		Map<String, Object> result=new HashMap<String, Object>();
+		System.out.println(movie.getMovieName());
+		Movie movie2=userService.getMovie(movie);
+		if(movie2!=null) {
+			result.put("msg", "获取成功");
+			result.put("result", movie2);
+		}else {
+			result.put("msg", "获取失败");
+		}
+		return result;
 	}
 //	@RequestMapping("/test")
 //	public ModelAndView test(HttpServletRequest request,HttpServletResponse response) {
