@@ -3,10 +3,12 @@ import weixin.pea.pojo.Comment;
 import weixin.pea.pojo.Movie;
 import weixin.pea.pojo.User;
 public interface UserService {
-	public User userLogin(User user);
-	public void userRegister(User user);
-	public User getUser(int userId);
-	public int updateUserInfo(User user);
-	public Movie getMovie(Movie movie);
-	public int postComment(Comment comment);
+	public User userLogin(User user);		//用户登录
+	public void userRegister(User user);		//用户注册
+	public User getUser(int userId);			//根据userId,查找用户
+	public int updateUserInfo(User user);	//修改用户信息
+	public Movie getMovie(Movie movie);		//查找电影
+	public int postComment(Comment comment); //发表评论
+	public int scoreCalculate(int score);	//计算电影平均分
+	public Comment queryComments(Comment comment);//查询电影评价
 }

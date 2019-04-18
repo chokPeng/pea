@@ -12,22 +12,28 @@ import weixin.pea.service.UserService;
 public class UserServiceImpl implements UserService{
 	@Autowired
 	UserMapper userMapper;
-	public User userLogin(User user) {
+	public User userLogin(User user) {				//用户登录
 		return userMapper.userLogin(user);
 	}
-	public void userRegister(User user) {
+	public void userRegister(User user) {			//用户注册
 		userMapper.userRegister(user);
 	}
-	public User getUser(int userId) {
+	public User getUser(int userId) {				//查询用户
 		return userMapper.getUser(userId);
 	}
-	public int  updateUserInfo(User user) {
+	public int  updateUserInfo(User user) {			//修改用户信息
 		return userMapper.updateInfo(user);
 	}
-	public Movie getMovie(Movie movie) {
+	public Movie getMovie(Movie movie) {				//查询电影
 		return userMapper.getMovie(movie);
 	}
-	public int postComment(Comment comment) {
+	public int postComment(Comment comment) {		//发表评论
 		return userMapper.postComment(comment);
+	}
+	public int scoreCalculate(int score) {			//计算电影平均分
+		return userMapper.scoreCalculate(score);
+	}
+	public Comment queryComments(Comment comment) {	//查询电影评价
+		return userMapper.queryComments(comment);
 	}
 }

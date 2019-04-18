@@ -10,4 +10,6 @@ public interface UserMapper {
 	public Movie getMovie(Movie movie);
 	public int updateInfo(User user);
 	public int postComment(Comment comment);
+	public int scoreCalculate(int score);
+	public Comment queryComments(Comment comment);
 }

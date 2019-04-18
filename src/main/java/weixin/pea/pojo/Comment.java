@@ -1,12 +1,15 @@
 package weixin.pea.pojo;
 
+import java.sql.Date;
+
 public class Comment {
-	private int commentId;
-	private int userId;
+	private int commentId;		
+	private int userId;		
 	private String userName;
-	private String movieName;
-	private String movieId;
-	private String commentContent;
+	private String movieName;			//电影名
+	private String movieId;				//电影Id
+	private String commentContent;		//评论内容
+	private Date commontDate;			//评论时间
 	public int getCommentId() {
 		return commentId;
 	}
@@ -42,5 +45,11 @@ public class Comment {
 	}
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
+	}
+	public Date getCommontDate() {
+		return commontDate;
+	}
+	public void setCommontDate(Date commontDate) {
+		this.commontDate = commontDate;
 	}
 }

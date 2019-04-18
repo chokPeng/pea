@@ -7,7 +7,9 @@ public class Movie {
 	private String movieInfo;
 	private Date releaseDate;
 	private String actor;
-	private Double score;
+	private Double totalScore;				 //总得分
+	private Double averageScore;				//平均分
+	private int scoreNumber;				    //参与评分人数
 	public int getMovieId() {
 		return movieId;
 	}
@@ -38,10 +40,22 @@ public class Movie {
 	public void setActor(String actor) {
 		this.actor = actor;
 	}
-	public Double getScore() {
-		return score;
+	public Double getTotalScore() {
+		return totalScore;
 	}
-	public void setScore(Double score) {
-		this.score = score;
+	public void setTotalScore(Double totalScore) {
+		this.totalScore = totalScore;
+	}
+	public int getScoreNumber() {
+		return scoreNumber;
+	}
+	public void setScoreNumber(int scoreNumber) {
+		this.scoreNumber = scoreNumber;
+	}
+	public Double getAverageScore() {
+		return averageScore;
+	}
+	public void setAverageScore(Double averageScore) {
+		this.averageScore = averageScore;
 	}
 }
