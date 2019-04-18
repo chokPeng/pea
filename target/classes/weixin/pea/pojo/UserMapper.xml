@@ -15,6 +15,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateInfo" parameterType="weixin.pea.pojo.User">
 		update user set userName=#{userName},userSex=#{userSex},userInfo=#{userInfo} where userId=#{userId}
 	</update>
+	<insert id="postComment" parameterType="weixin.pea.pojo.Comment">
+		insert into comment (movieId,movieName,userId,userName,commentContent) values (#{movieId},#{movieName},#{userId},#{userName},#{commentContent})
+	</insert>
 	<!-- 
 	<delete id="deleteStudent"	parameterType="com.chokPeng.ssmLearning.pojo.Student" >
 		delete from student where studentId=#{studentId}

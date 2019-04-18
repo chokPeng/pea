@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import weixin.pea.pojo.Comment;
 import weixin.pea.pojo.Movie;
 import weixin.pea.pojo.User;
 import weixin.pea.service.UserService;
@@ -58,21 +59,6 @@ public class UserController extends HttpServlet{
 			return null;
 		}
 	}
-	//根据电影名查询电影
-	@RequestMapping(value="/getMovie",method=RequestMethod.POST)
-	public ModelAndView getMovie(Movie movie) {
-		System.out.println(movie.getMovieName());
-		Movie movie2=userService.getMovie(movie);
-		ModelAndView modelAndView=new ModelAndView();
-		if(movie2!=null) {	
-			modelAndView.addObject(movie2);
-			modelAndView.addObject("msg", "获取成功");
-			modelAndView.setView(new MappingJackson2JsonView());			
-		}else {
-			modelAndView.addObject("msg","获取失败");
-		}
-		return modelAndView;
-	}
 	//修改用户信息
 	@RequestMapping(value="/alterUserInfo",method=RequestMethod.POST)
 	public ModelAndView alterUserInfo(User user) {
@@ -88,4 +74,33 @@ public class UserController extends HttpServlet{
 		}
 		return modelAndView;
 	}
+	//根据电影名查询电影
+	@RequestMapping(value="/getMovie",method=RequestMethod.POST)
+	public ModelAndView getMovie(Movie movie) {
+		System.out.println(movie.getMovieName());
+		Movie movie2=userService.getMovie(movie);
+		ModelAndView modelAndView=new ModelAndView();
+		if(movie2!=null) {	
+			modelAndView.addObject(movie2);
+			modelAndView.addObject("msg", "获取成功");
+			modelAndView.setView(new MappingJackson2JsonView());			
+		}else {
+			modelAndView.addObject("msg","获取失败");
+		}
+		return modelAndView;
+	}
+	//发表电影评论
+	@RequestMapping(value="/comment",method=RequestMethod.POST)
+	public ModelAndView comment(Comment comment) {
+		ModelAndView modelAndView=new ModelAndView();
+		result=userService.postComment(comment);
+		if(result!=0) {
+			modelAndView.addObject(comment);
+			modelAndView.addObject("msg", "评论成功");
+		}else {
+			modelAndView.addObject("msg", "评论失败");
+		}
+		return modelAndView;
+	}
+
 }

@@ -1,6 +1,9 @@
 package weixin.pea.service.impl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import weixin.pea.pojo.Comment;
 import weixin.pea.pojo.Movie;
 import weixin.pea.pojo.User;
 import weixin.pea.pojo.UserMapper;
@@ -23,5 +26,8 @@ public class UserServiceImpl implements UserService{
 	}
 	public Movie getMovie(Movie movie) {
 		return userMapper.getMovie(movie);
+	}
+	public int postComment(Comment comment) {
+		return userMapper.postComment(comment);
 	}
 }

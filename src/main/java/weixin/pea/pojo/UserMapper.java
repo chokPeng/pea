@@ -9,4 +9,5 @@ public interface UserMapper {
 	public User getUser(int userId);
 	public Movie getMovie(Movie movie);
 	public int updateInfo(User user);
+	public int postComment(Comment comment);
 }
