@@ -18,6 +18,9 @@ public class UserServiceImpl implements UserService{
 	public User getUser(int userId) {
 		return userMapper.getUser(userId);
 	}
+	public int  updateUserInfo(User user) {
+		return userMapper.updateInfo(user);
+	}
 	public Movie getMovie(Movie movie) {
 		return userMapper.getMovie(movie);
 	}

@@ -6,4 +6,5 @@ public interface UserService {
 	public void userRegister(User user);
 	public User getUser(int userId);
 	public Movie getMovie(Movie movie);
+	public int updateUserInfo(User user);
 }

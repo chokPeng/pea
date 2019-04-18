@@ -8,5 +8,5 @@ public interface UserMapper {
 	public void userRegister(User user);
 	public User getUser(int userId);
 	public Movie getMovie(Movie movie);
-	public void updateInfo(User user);
+	public int updateInfo(User user);
 }

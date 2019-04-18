@@ -1,25 +1,14 @@
 package weixin.pea.controller;
 
-
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -28,6 +17,11 @@ import weixin.pea.pojo.User;
 import weixin.pea.service.UserService;
 @Controller
 public class UserController extends HttpServlet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	int result;
 	@Autowired
 	UserService userService;
 	//用户注册
@@ -66,43 +60,32 @@ public class UserController extends HttpServlet{
 	}
 	//根据电影名查询电影
 	@RequestMapping(value="/getMovie",method=RequestMethod.POST)
-	@ResponseBody
 	public ModelAndView getMovie(Movie movie) {
 		System.out.println(movie.getMovieName());
 		Movie movie2=userService.getMovie(movie);
-		if(movie2!=null) {
-			ModelAndView modelAndView=new ModelAndView();
+		ModelAndView modelAndView=new ModelAndView();
+		if(movie2!=null) {	
 			modelAndView.addObject(movie2);
-			modelAndView.setView(new MappingJackson2JsonView());
-			return modelAndView;
+			modelAndView.addObject("msg", "获取成功");
+			modelAndView.setView(new MappingJackson2JsonView());			
 		}else {
-			return null;
+			modelAndView.addObject("msg","获取失败");
 		}
+		return modelAndView;
 	}
-	@RequestMapping(value="/getMovie2",method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> getMovie2(Movie movie) {
-		Map<String, Object> result=new HashMap<String, Object>();
-		System.out.println(movie.getMovieName());
-		Movie movie2=userService.getMovie(movie);
-		if(movie2!=null) {
-			result.put("msg", "获取成功");
-			result.put("result", movie2);
+	//修改用户信息
+	@RequestMapping(value="/alterUserInfo",method=RequestMethod.POST)
+	public ModelAndView alterUserInfo(User user) {
+		result=userService.updateUserInfo(user);
+		ModelAndView modelAndView=new ModelAndView();
+		if(result!=0) {
+			User user2=userService.getUser(user.getUserId());	//修改用户信息后,返回修改后的用户信息
+			modelAndView.addObject(user2);
+			modelAndView.addObject("msg", "修改成功");
+			modelAndView.setView(new MappingJackson2JsonView());			
 		}else {
-			result.put("msg", "获取失败");
+			modelAndView.addObject("msg","修改失败");
 		}
-		return result;
+		return modelAndView;
 	}
-//	@RequestMapping("/test")
-//	public ModelAndView test(HttpServletRequest request,HttpServletResponse response) {
-//		HttpSession session=request.getSession();
-//		User user3=(User) session.getAttribute("user21");
-//		System.out.println(session.getId());
-//		System.out.println(user3.toString());
-//		System.out.println(user3.getUserId());
-//		System.out.println(user3.getUserName());
-//		ModelAndView modelAndView=new ModelAndView();
-//		modelAndView.addObject(user3);
-//		return modelAndView;
-//	}
 }
