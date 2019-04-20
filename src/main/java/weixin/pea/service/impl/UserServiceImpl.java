@@ -24,6 +24,9 @@ public class UserServiceImpl implements UserService{
 	public int  updateUserInfo(User user) {			//修改用户信息
 		return userMapper.updateInfo(user);
 	}
+	public int addMovie(Movie movie) {				//添加电影
+		return userMapper.addMovie(movie);
+	}
 	public Movie getMovie(Movie movie) {				//查询电影
 		return userMapper.getMovie(movie);
 	}
@@ -35,5 +38,8 @@ public class UserServiceImpl implements UserService{
 	}
 	public Comment queryComments(Comment comment) {	//查询电影评价
 		return userMapper.queryComments(comment);
+	}
+	public int updateMovie(Movie movie) {
+		return userMapper.updateMovie(movie);
 	}
 }

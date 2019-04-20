@@ -75,12 +75,29 @@ public class UserController extends HttpServlet{
 	//添加电影
 	@RequestMapping(value="/addMovie",method=RequestMethod.POST)
 	public  ModelAndView addMovie(Movie movie) {
-		
-		ModelAndView modelAndView=new ModelAndView();
-		
+		result=userService.addMovie(movie);
+		if (result!=0) {
+			modelAndView.addObject(movie);
+			modelAndView.addObject("msg", "添加成功");
+		} else {
+			modelAndView.addObject("msg", "添加失败");
+		}
 		return modelAndView;
 	}
 	//修改电影信息
+	@RequestMapping(value="/updateMovie",method=RequestMethod.POST)
+	public ModelAndView updateMovie(Movie movie) {
+		System.out.println(movie.getMovieId());
+		result=userService.updateMovie(movie);
+		if(result!=0) {
+			modelAndView.addObject(movie);
+			modelAndView.addObject("msg", "修改成功");
+			modelAndView.setView(new MappingJackson2JsonView());
+		}else {
+			modelAndView.addObject("msg","修改失败");
+		}
+		return modelAndView;
+	}
 	//根据电影名查询电影
 	@RequestMapping(value="/getMovie",method=RequestMethod.POST)
 	public ModelAndView getMovie(Movie movie) {
