@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户登录页面</title>
 <body>
-<form action="./userLogin">
+<form action="./userLogin" method="post">
 账号<input id="userId" name="userId">
 密码<input id="userPassword" name="userPassword">
 <input type="submit" value="提交">

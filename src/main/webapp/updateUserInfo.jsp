@@ -8,12 +8,14 @@
 </head>
 <body>
 <div>
-	<form action="alterInfo">
-		昵称<input name="userName">
-		密码<input type="password" name="userPassword">
-		性别<input name="userSex">
-		信息<input name="userInfo">
-		地址<input name="userAdress">
+	<form action="updateUserInfo" method="post">
+		用户Id<input name="userId"><br>
+		昵称<input name="userName"><br>
+		密码<input type="password" name="userPassword"><br>
+		性别<input name="userSex"><br>
+		信息<input name="userInfo"><br>
+		地址<input name="userAdress"><br>
+		<input type="submit" value="提交">
 	</form>
 </div>
 </body>

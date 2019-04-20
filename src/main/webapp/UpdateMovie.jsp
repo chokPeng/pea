@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-	<form action="./updateMovie" method="post">
+	<form action="./updateMovieInfo" method="post">
 	电影Id<input name="movieId"><br>
 	电影名<input name="movieName"><br>
 	上映日期<input name="releaseDate"><br>

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
 		return userMapper.getUser(userId);
 	}
 	public int  updateUserInfo(User user) {			//修改用户信息
-		return userMapper.updateInfo(user);
+		return userMapper.updateUserInfo(user);
 	}
 	public int addMovie(Movie movie) {				//添加电影
 		return userMapper.addMovie(movie);

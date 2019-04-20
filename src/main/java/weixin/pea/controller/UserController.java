@@ -45,22 +45,26 @@ public class UserController extends HttpServlet{
 	}
 	//用户登录
 	@RequestMapping(value="/userLogin",method=RequestMethod.POST)
-	public ModelAndView login(User user,HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView login(User user) {
 		User user1=userService.userLogin(user);
 		if(user1!=null) {
-			HttpSession session=request.getSession();
-			session.setAttribute("userLogin",user1);
-			System.out.println(session.getId());
+			//HttpSession session=request.getSession();
+			//session.setAttribute("userLogin",user1);
+			System.out.println(user.getUserId());
+			System.out.println(user.getUserPassword());
+			//System.out.println(session.getAttribute("userLogin").toString());
 			modelAndView.addObject(user1);
+			modelAndView.addObject("msg", "登录成功");
 			modelAndView.setView(new MappingJackson2JsonView());
-			return modelAndView;
 		}else {
-			return null;
+			modelAndView.addObject("msg", "登录失败");
 		}
+	   return modelAndView;
 	}
 	//修改用户信息
-	@RequestMapping(value="/alterUserInfo",method=RequestMethod.POST)
+	@RequestMapping(value="/updateUserInfo",method=RequestMethod.POST)
 	public ModelAndView alterUserInfo(User user) {
+		System.out.println(user.getUserId());
 		result=userService.updateUserInfo(user);
 		if(result!=0) {
 			User user2=userService.getUser(user.getUserId());	//修改用户信息后,返回修改后的用户信息
@@ -85,7 +89,7 @@ public class UserController extends HttpServlet{
 		return modelAndView;
 	}
 	//修改电影信息
-	@RequestMapping(value="/updateMovie",method=RequestMethod.POST)
+	@RequestMapping(value="/updateMovieInfo",method=RequestMethod.POST)
 	public ModelAndView updateMovie(Movie movie) {
 		System.out.println(movie.getMovieId());
 		result=userService.updateMovie(movie);
