@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="userLogin" parameterType="weixin.pea.pojo.User" resultType="weixin.pea.pojo.User">
 		select * from user where userId= #{userId} and userPassword=#{userPassword}
 	</select>
-	<select id="getUser" parameterType="java.lang.Integer" resultType="weixin.pea.pojo.User">
+	<select id="queryUser" parameterType="java.lang.Integer" resultType="weixin.pea.pojo.User">
 		select * from user where userId= #{userId}
 	</select>
 	<insert id="userRegister"	parameterType="weixin.pea.pojo.User" >
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	-->
 	<!-- 查询电影信息 -->
-	<select id="getMovie" parameterType="weixin.pea.pojo.Movie" resultType="weixin.pea.pojo.Movie">
+	<select id="queryMovie" parameterType="weixin.pea.pojo.Movie" resultType="weixin.pea.pojo.Movie">
 		select * from movieDetail where movieName=#{movieName}
 	</select> 
 </mapper>

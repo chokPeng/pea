@@ -23,7 +23,7 @@ public class UserController extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 1L;
 	int result;
-	ModelAndView modelAndView=new ModelAndView();
+
 	@Autowired
 	UserService userService;
 	//用户注册
@@ -33,26 +33,30 @@ public class UserController extends HttpServlet{
 		User user1=(User) session.getAttribute("userLogin");
 		System.out.println(session.getId());
 		System.out.println(user1.getUserId());
-		User user2=userService.getUser(user1.getUserId());
+		User user2=userService.queryUser(user1.getUserId());
+		ModelAndView modelAndView=new ModelAndView();
 		if(user2==null) {
 			userService.userRegister(user);
 			modelAndView.addObject(user);
+			modelAndView.addObject("msg", "注册成功");
 			modelAndView.setView(new MappingJackson2JsonView());
 			return modelAndView;
 		}else {
-			return null;
+			modelAndView.addObject("msg", "注册失败");
 		}
+		return modelAndView;
 	}
 	//用户登录
 	@RequestMapping(value="/userLogin",method=RequestMethod.POST)
 	public ModelAndView login(User user) {
 		User user1=userService.userLogin(user);
+		ModelAndView modelAndView=new ModelAndView();
 		if(user1!=null) {
 			//HttpSession session=request.getSession();
 			//session.setAttribute("userLogin",user1);
 			System.out.println(user.getUserId());
 			System.out.println(user.getUserPassword());
-			//System.out.println(session.getAttribute("userLogin").toString());
+
 			modelAndView.addObject(user1);
 			modelAndView.addObject("msg", "登录成功");
 			modelAndView.setView(new MappingJackson2JsonView());
@@ -66,8 +70,10 @@ public class UserController extends HttpServlet{
 	public ModelAndView alterUserInfo(User user) {
 		System.out.println(user.getUserId());
 		result=userService.updateUserInfo(user);
+		ModelAndView modelAndView=new ModelAndView();
 		if(result!=0) {
-			User user2=userService.getUser(user.getUserId());	//修改用户信息后,返回修改后的用户信息
+			User user2=userService.queryUser(user.getUserId());	//修改用户信息后,返回修改后的用户信息
+			
 			modelAndView.addObject(user2);
 			modelAndView.addObject("msg", "修改成功");
 			modelAndView.setView(new MappingJackson2JsonView());			
@@ -80,6 +86,7 @@ public class UserController extends HttpServlet{
 	@RequestMapping(value="/addMovie",method=RequestMethod.POST)
 	public  ModelAndView addMovie(Movie movie) {
 		result=userService.addMovie(movie);
+		ModelAndView modelAndView=new ModelAndView();
 		if (result!=0) {
 			modelAndView.addObject(movie);
 			modelAndView.addObject("msg", "添加成功");
@@ -93,6 +100,7 @@ public class UserController extends HttpServlet{
 	public ModelAndView updateMovie(Movie movie) {
 		System.out.println(movie.getMovieId());
 		result=userService.updateMovie(movie);
+		ModelAndView modelAndView=new ModelAndView();
 		if(result!=0) {
 			modelAndView.addObject(movie);
 			modelAndView.addObject("msg", "修改成功");
@@ -106,7 +114,8 @@ public class UserController extends HttpServlet{
 	@RequestMapping(value="/getMovie",method=RequestMethod.POST)
 	public ModelAndView getMovie(Movie movie) {
 		System.out.println(movie.getMovieName());
-		Movie movie2=userService.getMovie(movie);
+		Movie movie2=userService.queryMovie(movie);
+		ModelAndView modelAndView=new ModelAndView();
 		if(movie2!=null) {	
 			modelAndView.addObject(movie2);
 			modelAndView.addObject("msg", "获取成功");
@@ -120,6 +129,7 @@ public class UserController extends HttpServlet{
 	@RequestMapping(value="/comment",method=RequestMethod.POST)
 	public ModelAndView comment(Comment comment) {
 		result=userService.postComment(comment);		//插入评论
+		ModelAndView modelAndView=new ModelAndView();
 		if(result!=0) {
 			modelAndView.addObject(comment);
 			modelAndView.addObject("msg", "评论成功");
@@ -133,6 +143,7 @@ public class UserController extends HttpServlet{
 	@RequestMapping(value="/queryComments",method=RequestMethod.POST)
 	public ModelAndView queryComments(Comment comment) {
 		Comment comment2=userService.queryComments(comment);
+		ModelAndView modelAndView=new ModelAndView();
 		if(comment2!=null) {
 			modelAndView.addObject(comment2);
 			modelAndView.addObject("msg", "查询成功");
@@ -145,12 +156,12 @@ public class UserController extends HttpServlet{
 	//电影评分计算,先从查询电影总得分totalScore,并存入数据库,再计算平均分averageScore,最后返回averageScore
 	@RequestMapping(value="/scoreCalculate",method=RequestMethod.POST)
 	public ModelAndView scoreCalculate(Movie movieId,Double score) {		//传入movieId和用户打的分
-		Movie movie=userService.getMovie(movieId);
+		ModelAndView modelAndView=new ModelAndView();
+		Movie movie=userService.queryMovie(movieId);
 		Double totalScore=movie.getTotalScore()+score;
 		int scoreNumber=movie.getScoreNumber()+1;
 		movie.setTotalScore(totalScore);
 		movie.setAverageScore(totalScore/scoreNumber);
 		return modelAndView;
-		//Double averageScore=userService.
 	}
 }

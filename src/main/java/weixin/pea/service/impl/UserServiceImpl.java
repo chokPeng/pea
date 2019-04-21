@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService{
 	public void userRegister(User user) {			//用户注册
 		userMapper.userRegister(user);
 	}
-	public User getUser(int userId) {				//查询用户
-		return userMapper.getUser(userId);
+	public User queryUser(int userId) {				//查询用户
+		return userMapper.queryUser(userId);
 	}
 	public int  updateUserInfo(User user) {			//修改用户信息
 		return userMapper.updateUserInfo(user);
@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService{
 	public int addMovie(Movie movie) {				//添加电影
 		return userMapper.addMovie(movie);
 	}
-	public Movie getMovie(Movie movie) {				//查询电影
-		return userMapper.getMovie(movie);
+	public Movie queryMovie(Movie movie) {				//查询电影
+		return userMapper.queryMovie(movie);
 	}
 	public int postComment(Comment comment) {		//发表评论
 		return userMapper.postComment(comment);
