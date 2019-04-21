@@ -26,14 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateMovie" parameterType="weixin.pea.pojo.Movie">
 		update movieDetail set movieName=#{movieName},releaseDate=#{releaseDate},actor=#{actor},movieInfo=#{movieInfo} where movieId=#{movieId}
 	</update>
-	<!-- 
-	<delete id="deleteStudent"	parameterType="com.chokPeng.ssmLearning.pojo.Student" >
-		delete from student where studentId=#{studentId}
-	</delete>
-
-	-->
 	<!-- 查询电影信息 -->
 	<select id="queryMovie" parameterType="weixin.pea.pojo.Movie" resultType="weixin.pea.pojo.Movie">
-		select * from movieDetail where movieName=#{movieName}
+		select * from movieDetail where movieName like concat(concat('%',#{movieName}),'%')
 	</select> 
 </mapper>

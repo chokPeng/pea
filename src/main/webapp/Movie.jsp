@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查找电影页面</title>
 <body>
-<form action="./getMovie">
+<form action="./queryMovie" method="post">
 电影名<input  name="movieName">
 <input type="submit" value="提交">
 </form>

@@ -110,8 +110,8 @@ public class UserController extends HttpServlet{
 		}
 		return modelAndView;
 	}
-	//根据电影名查询电影
-	@RequestMapping(value="/getMovie",method=RequestMethod.POST)
+	//根据电影名查询电影,可模糊查找
+	@RequestMapping(value="/queryMovie",method=RequestMethod.POST)
 	public ModelAndView getMovie(Movie movie) {
 		System.out.println(movie.getMovieName());
 		Movie movie2=userService.queryMovie(movie);
