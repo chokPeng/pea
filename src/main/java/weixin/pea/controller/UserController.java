@@ -1,5 +1,8 @@
 package weixin.pea.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -164,4 +167,19 @@ public class UserController extends HttpServlet{
 		movie.setAverageScore(totalScore/scoreNumber);
 		return modelAndView;
 	}
+	//上传文件
+	 @RequestMapping(value="/uploadFile",method = RequestMethod.POST)
+	 public  ModelAndView uploadImg(MultipartFile img) throws IOException {
+		 System.out.println(img);
+	    		ModelAndView modelAndView=new ModelAndView();
+	        System.out.println("上传文件成功!1");
+	        File f=new File("/Users/pengchunkao/lala/"+img.getOriginalFilename());
+	        //写入磁盘
+	        img.transferTo(f);
+	        System.out.println("上传文件成功!2");
+	        String path=f.getAbsolutePath();
+	        modelAndView.addObject("path", path);
+	        System.out.println("上传文件成功!3");
+	        return modelAndView;
+	    }
 }

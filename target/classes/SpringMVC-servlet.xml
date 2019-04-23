@@ -45,10 +45,12 @@
 	</mvc:interceptor>
     </mvc:interceptors>
      -->
+    
     <!--配置上传文件数据解析器  -->
+    <!-- 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize">
             <value>9242880</value>
         </property>
-    </bean>
+    </bean> -->
  </beans>

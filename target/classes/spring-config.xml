@@ -40,6 +40,8 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+   <!-- 配置multipart解析器 -->
+  <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
     <!-- 使用声明式事务管理方式 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 </beans>
