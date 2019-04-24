@@ -170,7 +170,7 @@ public class UserController extends HttpServlet{
 	//上传文件
 	 @RequestMapping(value="/uploadFile",method = RequestMethod.POST)
 	 public  ModelAndView uploadImg(MultipartFile img) throws IOException {
-		 System.out.println(img);
+		 	System.out.println(img.getOriginalFilename());
 	    		ModelAndView modelAndView=new ModelAndView();
 	        System.out.println("上传文件成功!1");
 	        File f=new File("/Users/pengchunkao/lala/"+img.getOriginalFilename());
@@ -178,6 +178,7 @@ public class UserController extends HttpServlet{
 	        img.transferTo(f);
 	        System.out.println("上传文件成功!2");
 	        String path=f.getAbsolutePath();
+	        System.out.println(path);
 	        modelAndView.addObject("path", path);
 	        System.out.println("上传文件成功!3");
 	        return modelAndView;

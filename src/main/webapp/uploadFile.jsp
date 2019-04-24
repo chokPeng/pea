@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>上传文件顶顶顶顶</title>
+<title>上传文件</title>
 </head>
 <body>
 <form action="./uploadFile" method="post" enctype="multipart/form-data">
