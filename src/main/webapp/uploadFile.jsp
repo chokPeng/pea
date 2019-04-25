@@ -9,6 +9,7 @@
 <body>
 <form action="./uploadFile" method="post" enctype="multipart/form-data">
     <input type="file" name="img" accept="image/jpg,image/png">
+    用户ID<input name="userId">
     <input type="submit" value="提交" >
 </form>
 </body>

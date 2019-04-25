@@ -42,4 +42,7 @@ public class UserServiceImpl implements UserService{
 	public int updateMovie(Movie movie) {
 		return userMapper.updateMovie(movie);
 	}
+	public int storeFilePath(User user) {
+		return userMapper.storeFilePath(user);
+	}
 }

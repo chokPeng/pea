@@ -34,7 +34,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<multipart-config>
-			<location>/Users/pengchunkao/lala/</location>
+			<location>/Users/pengchunkao/eclipse-workspace/pea/src/main/webapp/image/</location>
 			<max-file-size>20971526</max-file-size>
 			<max-request-size>41943046</max-request-size>
 		</multipart-config>

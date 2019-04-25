@@ -169,18 +169,22 @@ public class UserController extends HttpServlet{
 	}
 	//上传文件
 	 @RequestMapping(value="/uploadFile",method = RequestMethod.POST)
-	 public  ModelAndView uploadImg(MultipartFile img) throws IOException {
-		 	System.out.println(img.getOriginalFilename());
+	 public  ModelAndView uploadImg(MultipartFile img,User user) throws IOException {
 	    		ModelAndView modelAndView=new ModelAndView();
-	        System.out.println("上传文件成功!1");
-	        File f=new File("/Users/pengchunkao/lala/"+img.getOriginalFilename());
-	        //写入磁盘
-	        img.transferTo(f);
-	        System.out.println("上传文件成功!2");
-	        String path=f.getAbsolutePath();
+	        File f=new File("/Users/pengchunkao/eclipse-workspace/pea/src/main/webapp/image/"+img.getOriginalFilename());
+	        img.transferTo(f);									//写入磁盘
+	        String path=f.getAbsolutePath();				//获取文件存储的绝对路径
+	        user.setUserImage(path);
 	        System.out.println(path);
-	        modelAndView.addObject("path", path);
-	        System.out.println("上传文件成功!3");
+	        result=userService.storeFilePath(user);						//存储文件到指定路径
+	        if(result!=0) {
+	        	 	modelAndView.addObject("path", path);
+	        	 	modelAndView.addObject("msg", "上传成功");
+	    	        modelAndView.setView(new MappingJackson2JsonView());
+	        }else {
+	        		modelAndView.addObject("msg", "上传失败");
+	        }
+	        System.out.println(modelAndView.toString());
 	        return modelAndView;
 	    }
 }

@@ -10,6 +10,7 @@ public class User {
 	private String userInfo;
 	private String userAdress;
 	private String userSex;
+	private String userImage;
 	public int getUserId() {
 		return userId;
 	}
@@ -45,5 +46,11 @@ public class User {
 	}
 	public void setUserSex(String userSex) {
 		this.userSex = userSex;
+	}
+	public String getUserImage() {
+		return userImage;
+	}
+	public void setUserImage(String userImage) {
+		this.userImage = userImage;
 	}
 }

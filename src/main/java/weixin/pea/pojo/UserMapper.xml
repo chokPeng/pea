@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user where userId= #{userId}
 	</select>
 	<insert id="userRegister"	parameterType="weixin.pea.pojo.User" >
-		insert into user (userId,userName,userPassword,userSex,userInfo,userAdress) values (#{userId},#{userName},#{userPassword},#{userSex},#{userInfo},#{userAdress})
+		insert into user (userId,userName,userPassword,userSex,userInfo,userAdress,userImage) values (#{userId},#{userName},#{userPassword},#{userSex},#{userInfo},#{userAdress},#{userImage})
 	</insert>
 	<update id="updateUserInfo" parameterType="weixin.pea.pojo.User">
 		update user set userName=#{userName},userPassword=#{userPassword},userSex=#{userSex},userInfo=#{userInfo},userAdress=#{userAdress} where userId=#{userId}
@@ -30,4 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="queryMovie" parameterType="weixin.pea.pojo.Movie" resultType="weixin.pea.pojo.Movie">
 		select * from movieDetail where movieName like concat(concat('%',#{movieName}),'%')
 	</select> 
+	<!-- 存储用户上传的图片文件的绝对路径 -->
+	<update id="storeFilePath" parameterType="weixin.pea.pojo.User">
+		update user set userImage=#{userImage} where userId=#{userId}
+	</update>
 </mapper>
