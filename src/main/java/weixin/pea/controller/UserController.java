@@ -2,6 +2,9 @@ package weixin.pea.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -115,18 +119,11 @@ public class UserController extends HttpServlet{
 	}
 	//根据电影名查询电影,可模糊查找
 	@RequestMapping(value="/queryMovie",method=RequestMethod.POST)
-	public ModelAndView getMovie(Movie movie) {
-		System.out.println(movie.getMovieName());
-		Movie movie2=userService.queryMovie(movie);
-		ModelAndView modelAndView=new ModelAndView();
-		if(movie2!=null) {	
-			modelAndView.addObject(movie2);
-			modelAndView.addObject("msg", "获取成功");
-			modelAndView.setView(new MappingJackson2JsonView());			
-		}else {
-			modelAndView.addObject("msg","获取失败");
-		}
-		return modelAndView;
+	@ResponseBody
+	public Map<String,LinkedList<Movie>> queryMovie(Movie movie) {
+		Map<String,LinkedList<Movie>> map=new HashMap<>();
+		map.put("movieList", userService.queryMovie(movie));
+		return map;
 	}
 	//发表电影评论
 	@RequestMapping(value="/comment",method=RequestMethod.POST)
@@ -157,16 +154,16 @@ public class UserController extends HttpServlet{
 		return modelAndView;
 	}
 	//电影评分计算,先从查询电影总得分totalScore,并存入数据库,再计算平均分averageScore,最后返回averageScore
-	@RequestMapping(value="/scoreCalculate",method=RequestMethod.POST)
-	public ModelAndView scoreCalculate(Movie movieId,Double score) {		//传入movieId和用户打的分
-		ModelAndView modelAndView=new ModelAndView();
-		Movie movie=userService.queryMovie(movieId);
-		Double totalScore=movie.getTotalScore()+score;
-		int scoreNumber=movie.getScoreNumber()+1;
-		movie.setTotalScore(totalScore);
-		movie.setAverageScore(totalScore/scoreNumber);
-		return modelAndView;
-	}
+//	@RequestMapping(value="/scoreCalculate",method=RequestMethod.POST)
+//	public ModelAndView scoreCalculate(Movie movieId,Double score) {		//传入movieId和用户打的分
+//		ModelAndView modelAndView=new ModelAndView();
+//		LinkedList<Movie> list=userService.queryMovie(movieId);
+//		Double totalScore=movie.getTotalScore()+score;
+//		int scoreNumber=movie.getScoreNumber()+1;
+//		movie.setTotalScore(totalScore);
+//		movie.setAverageScore(totalScore/scoreNumber);
+//		return modelAndView;
+//	}
 	//上传文件
 	 @RequestMapping(value="/uploadFile",method = RequestMethod.POST)
 	 public  ModelAndView uploadImg(MultipartFile img,User user) throws IOException {

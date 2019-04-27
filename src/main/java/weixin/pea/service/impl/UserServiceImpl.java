@@ -1,5 +1,7 @@
 package weixin.pea.service.impl;
 
+import java.util.LinkedList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class UserServiceImpl implements UserService{
 	public int addMovie(Movie movie) {				//添加电影
 		return userMapper.addMovie(movie);
 	}
-	public Movie queryMovie(Movie movie) {				//查询电影
+	public LinkedList<Movie> queryMovie(Movie movie) {				//查询电影
 		return userMapper.queryMovie(movie);
 	}
 	public int postComment(Comment comment) {		//发表评论

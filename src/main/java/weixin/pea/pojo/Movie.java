@@ -9,7 +9,8 @@ public class Movie {
 	private String actor;
 	private Double totalScore;				 //总得分
 	private Double averageScore;				//平均分
-	private int scoreNumber;				    //参与评分人数
+	private int scoreNumber;				//参与评分人数
+	private String image;				//图片存储路径
 	public int getMovieId() {
 		return movieId;
 	}
@@ -57,5 +58,11 @@ public class Movie {
 	}
 	public void setAverageScore(Double averageScore) {
 		this.averageScore = averageScore;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
