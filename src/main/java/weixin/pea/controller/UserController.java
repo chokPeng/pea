@@ -56,20 +56,16 @@ public class UserController extends HttpServlet{
 	//用户登录
 	@RequestMapping(value="/userLogin",method=RequestMethod.POST)
 	public ModelAndView login(User user) {
+		System.out.println("Id:"+user.getUserId()+"密码："+user.getUserPassword());
 		User user1=userService.userLogin(user);
 		ModelAndView modelAndView=new ModelAndView();
 		if(user1!=null) {
-			//HttpSession session=request.getSession();
-			//session.setAttribute("userLogin",user1);
-			System.out.println(user.getUserId());
-			System.out.println(user.getUserPassword());
-
 			modelAndView.addObject(user1);
 			modelAndView.addObject("msg", "登录成功");
-			modelAndView.setView(new MappingJackson2JsonView());
 		}else {
 			modelAndView.addObject("msg", "登录失败");
 		}
+		modelAndView.setView(new MappingJackson2JsonView());
 	   return modelAndView;
 	}
 	//修改用户信息
@@ -169,7 +165,7 @@ public class UserController extends HttpServlet{
 	 public  ModelAndView uploadImg(MultipartFile img,User user) throws IOException {
 	    		ModelAndView modelAndView=new ModelAndView();
 	        File f=new File("/Users/pengchunkao/eclipse-workspace/pea/src/main/webapp/image/"+img.getOriginalFilename());
-	        img.transferTo(f);									//写入磁盘
+	        img.transferTo(f);			//写入磁盘
 	        String path=f.getAbsolutePath();				//获取文件存储的绝对路径
 	        user.setUserImage(path);
 	        System.out.println(path);

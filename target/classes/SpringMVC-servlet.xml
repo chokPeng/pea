@@ -24,6 +24,7 @@
          <property name="suffix" value=".jsp"></property>
      </bean>
      <!-- 使用注解驱动,不用注解驱动,component-scan则无效,bean也无法装配 -->
+     <!-- 使用注解驱动，会自动注册处理器适配器 -->
      <mvc:annotation-driven></mvc:annotation-driven>
     <!-- 设置使用注解的类所在的包 -->
    <context:component-scan base-package="weixin.pea.controller" >
