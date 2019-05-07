@@ -8,6 +8,7 @@
 <body>
 <form action="./queryMovie" method="post">
 电影名<input  name="movieName">
+<img src="src/main/webapp/gak.jpeg">
 <input type="submit" value="提交">
 </form>
 </body>

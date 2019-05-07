@@ -35,12 +35,12 @@
 		<load-on-startup>1</load-on-startup>
 		<multipart-config>
 			<location>/Users/pengchunkao/eclipse-workspace/pea/src/main/webapp/image/</location>
-			<max-file-size>20971526</max-file-size>
-			<max-request-size>41943046</max-request-size>
+			<max-file-size>2097152600</max-file-size>
+			<max-request-size>4194304600</max-request-size>
 		</multipart-config>
 	</servlet>
 	<servlet-mapping>
-    <servlet-name>SpringMVC</servlet-name>
+    		<servlet-name>SpringMVC</servlet-name>
     <!--
         一般有以下写法：
         *.do    拦截固定格式的请求
@@ -49,4 +49,6 @@
      -->
     		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<!-- 添加这个servlet -->
+
 </web-app>

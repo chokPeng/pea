@@ -163,11 +163,10 @@ public class UserController extends HttpServlet{
 	//上传文件
 	 @RequestMapping(value="/uploadFile",method = RequestMethod.POST)
 	 public  ModelAndView uploadImg(MultipartFile img,User user) throws IOException {
-	    		ModelAndView modelAndView=new ModelAndView();
+	    		ModelAndView modelAndView=new ModelAndView();	    		
 	        File f=new File("/Users/pengchunkao/eclipse-workspace/pea/src/main/webapp/image/"+img.getOriginalFilename());
 	        img.transferTo(f);			//写入磁盘
 	        String path=f.getAbsolutePath();				//获取文件存储的绝对路径
-	        user.setUserImage(path);
 	        System.out.println(path);
 	        result=userService.storeFilePath(user);						//存储文件到指定路径
 	        if(result!=0) {
