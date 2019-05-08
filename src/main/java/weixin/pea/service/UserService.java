@@ -13,7 +13,7 @@ public interface UserService {
 	public int addMovie(Movie movie);		//添加电影
 	public int postComment(Comment comment); //发表评论
 	public int scoreCalculate(int score);	//计算电影平均分
-	public Comment queryComments(Comment comment);//查询电影评价
+	public LinkedList<Comment> queryComments(Comment comment);//查询电影评价
 	public int updateMovie(Movie movie);		//修改电影信息
 	public int storeFilePath(User user);	//在数据库存储文件绝对路径
 }

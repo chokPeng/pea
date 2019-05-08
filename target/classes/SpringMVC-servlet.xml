@@ -30,7 +30,7 @@
    <context:component-scan base-package="weixin.pea.controller" >
    </context:component-scan>
      <!-- 配置注解的处理器映射器和处理器适配器 -->  
-    <!-- 访问静态资源文件处理器，<mvc:default-servlet-handler/>，没配置这个就访问不了静态资源-->
+    <!-- 访问静态资源文件处理器，<mvc:default-servlet-handler/>，没配置这个就访问不了图片，css，js等静态资源-->
 	<mvc:default-servlet-handler/>
 <!--     	配置拦截器
 	<mvc:interceptors>
@@ -40,12 +40,4 @@
 	</mvc:interceptor>
     </mvc:interceptors>
      -->
-    
-    <!--配置上传文件数据解析器  -->
-    <!-- 
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize">
-            <value>9242880</value>
-        </property>
-    </bean> -->
  </beans>

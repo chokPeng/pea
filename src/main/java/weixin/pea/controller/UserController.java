@@ -138,15 +138,11 @@ public class UserController extends HttpServlet{
 	//查看电影评价
 	@RequestMapping(value="/queryComments",method=RequestMethod.POST)
 	public ModelAndView queryComments(Comment comment) {
-		Comment comment2=userService.queryComments(comment);
+		//System.out.println(comment.getUserName());
+		System.out.println(comment.getMovieName());
 		ModelAndView modelAndView=new ModelAndView();
-		if(comment2!=null) {
-			modelAndView.addObject(comment2);
-			modelAndView.addObject("msg", "查询成功");
-			modelAndView.setView(new MappingJackson2JsonView());
-		}else {
-			modelAndView.addObject("msg", "查询失败");
-		}
+		modelAndView.addObject("comment",userService.queryComments(comment));
+		modelAndView.setView(new MappingJackson2JsonView());
 		return modelAndView;
 	}
 	//电影评分计算,先从查询电影总得分totalScore,并存入数据库,再计算平均分averageScore,最后返回averageScore

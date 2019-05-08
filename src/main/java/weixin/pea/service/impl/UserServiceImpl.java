@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
 	public int scoreCalculate(int score) {			//计算电影平均分
 		return userMapper.scoreCalculate(score);
 	}
-	public Comment queryComments(Comment comment) {	//查询电影评价
+	public LinkedList<Comment> queryComments(Comment comment){	//查询电影评价
 		return userMapper.queryComments(comment);
 	}
 	public int updateMovie(Movie movie) {

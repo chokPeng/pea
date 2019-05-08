@@ -15,6 +15,6 @@ public interface UserMapper {
 	public int postComment(Comment comment);			//发表评价
 	public int scoreCalculate(int score);			//计算电影评分
 	public int updateMovie(Movie movie);				//修改电影信息
-	public Comment queryComments(Comment comment);	//查询评价
+	public LinkedList<Comment> queryComments(Comment comment);	//查询评价
 	public int storeFilePath(User user);			//存储文件绝对路径
 }

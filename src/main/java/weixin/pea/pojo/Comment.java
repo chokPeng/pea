@@ -5,7 +5,8 @@ import java.sql.Date;
 public class Comment {
 	private int commentId;		
 	private int userId;		
-	private String userName;
+	private String userAvatar;			//用户头像
+	private String userName;				//用户名
 	private String movieName;			//电影名
 	private String movieId;				//电影Id
 	private String commentContent;		//评论内容
@@ -51,5 +52,11 @@ public class Comment {
 	}
 	public void setCommontDate(Date commontDate) {
 		this.commontDate = commontDate;
+	}
+	public String getUserAvatar() {
+		return userAvatar;
+	}
+	public void setUserAvatar(String userAvatar) {
+		this.userAvatar = userAvatar;
 	}
 }
