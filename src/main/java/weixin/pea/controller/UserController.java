@@ -122,7 +122,7 @@ public class UserController extends HttpServlet{
 		return map;
 	}
 	//发表电影评论
-	@RequestMapping(value="/comment",method=RequestMethod.POST)
+	@RequestMapping(value="/postComment",method=RequestMethod.POST)
 	public ModelAndView comment(Comment comment) {
 		result=userService.postComment(comment);		//插入评论
 		ModelAndView modelAndView=new ModelAndView();

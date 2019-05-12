@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update user set userName=#{userName},userPassword=#{userPassword},userSex=#{userSex},userInfo=#{userInfo},userAdress=#{userAdress} where userId=#{userId}
 	</update>
 	<insert id="postComment" parameterType="weixin.pea.pojo.Comment">
-		insert into movieComment (movieId,movieName,userId,userName,commentContent) values (#{movieId},#{movieName},#{userId},#{userName},#{commentContent})
+		insert into movieComments (movieName,userId,userName,commentContent) values (#{movieName},#{userId},#{userName},#{commentContent})
 	</insert>
 	<!-- 添加电影 -->
 	<insert id="addMovie" parameterType="weixin.pea.pojo.Movie">

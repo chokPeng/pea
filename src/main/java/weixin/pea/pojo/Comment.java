@@ -1,6 +1,8 @@
 package weixin.pea.pojo;
 
-import java.sql.Date;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Comment {
 	private int commentId;		
@@ -8,9 +10,10 @@ public class Comment {
 	private String userAvatar;			//用户头像
 	private String userName;				//用户名
 	private String movieName;			//电影名
-	private String movieId;				//电影Id
+	private int movieId;				//电影Id
 	private String commentContent;		//评论内容
-	private Date commontDate;			//评论时间
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date commentDate;			//评论时间
 	public int getCommentId() {
 		return commentId;
 	}
@@ -35,10 +38,10 @@ public class Comment {
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
 	}
-	public String getMovieId() {
+	public int getMovieId() {
 		return movieId;
 	}
-	public void setMovieId(String movieId) {
+	public void setMovieId(int movieId) {
 		this.movieId = movieId;
 	}
 	public String getCommentContent() {
@@ -47,11 +50,11 @@ public class Comment {
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
 	}
-	public Date getCommontDate() {
-		return commontDate;
+	public Date getCommentDate() {
+		return commentDate;
 	}
-	public void setCommontDate(Date commontDate) {
-		this.commontDate = commontDate;
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
 	}
 	public String getUserAvatar() {
 		return userAvatar;
