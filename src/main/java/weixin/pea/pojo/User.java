@@ -8,9 +8,9 @@ public class User {
 	private String userPassword;
 	private String userName;
 	private String userInfo;
-	private String userAdress;
+	private String userAddress;
 	private String userSex;
-	private String userImage;
+	private String userAvatar;
 	public int getUserId() {
 		return userId;
 	}
@@ -35,11 +35,11 @@ public class User {
 	public void setUserInfo(String userInfo) {
 		this.userInfo = userInfo;
 	}
-	public String getUserAdress() {
-		return userAdress;
+	public String getUserAddress() {
+		return userAddress;
 	}
-	public void setUserAdress(String userAdress) {
-		this.userAdress = userAdress;
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
 	}
 	public String getUserSex() {
 		return userSex;
@@ -47,10 +47,10 @@ public class User {
 	public void setUserSex(String userSex) {
 		this.userSex = userSex;
 	}
-	public String getUserImage() {
-		return userImage;
+	public String getUserAvatar() {
+		return userAvatar;
 	}
-	public void setUserImage(String userImage) {
-		this.userImage = userImage;
+	public void setUserAvatar(String userAvatar) {
+		this.userAvatar = userAvatar;
 	}
 }

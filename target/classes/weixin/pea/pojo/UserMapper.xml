@@ -6,17 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="userLogin" parameterType="weixin.pea.pojo.User" resultType="weixin.pea.pojo.User">
 		select * from user where userId= #{userId} and userPassword=#{userPassword}
 	</select>
-	<select id="queryUser" parameterType="java.lang.Integer" resultType="weixin.pea.pojo.User">
+	<select id="queryUser" parameterType="weixin.pea.pojo.User" resultType="weixin.pea.pojo.User">
 		select * from user where userId= #{userId}
 	</select>
-	<insert id="userRegister"	parameterType="weixin.pea.pojo.User" >
-		insert into user (userId,userName,userPassword,userSex,userInfo,userAdress,userImage) values (#{userId},#{userName},#{userPassword},#{userSex},#{userInfo},#{userAdress},#{userImage})
+	<insert id="userRegister"	parameterType="weixin.pea.pojo.User"  >
+		insert into user (userId,userName,userPassword,userSex,userInfo,userAdress,userAvatar) values (#{userId},#{userName},#{userPassword},#{userSex},#{userInfo},#{userAdress},#{userAvatar})
 	</insert>
-	<update id="updateUserInfo" parameterType="weixin.pea.pojo.User">
-		update user set userName=#{userName},userPassword=#{userPassword},userSex=#{userSex},userInfo=#{userInfo},userAdress=#{userAdress} where userId=#{userId}
+	<update id="updateUserInfo" parameterType="weixin.pea.pojo.User" >
+		update user set userName=#{userName},userPassword=#{userPassword},userSex=#{userSex},userAvatar=#{userAvatar},userInfo=#{userInfo},userAddress=#{userAddress} where userId=#{userId}
 	</update>
 	<insert id="postComment" parameterType="weixin.pea.pojo.Comment">
-		insert into movieComments (movieName,userId,userName,commentContent) values (#{movieName},#{userId},#{userName},#{commentContent})
+		insert into movieComments (movieName,userId,userName,commentContent,commentDate) values (#{movieName},#{userId},#{userName},#{commentContent},#{commentDate})
 	</insert>
 	<!-- 添加电影 -->
 	<insert id="addMovie" parameterType="weixin.pea.pojo.Movie">
@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select> 
 	<!-- 存储用户上传的图片文件的绝对路径 -->
 	<update id="storeFilePath" parameterType="weixin.pea.pojo.User">
-		update user set userImage=#{userImage} where userId=#{userId}
+		update user set userAvatar=#{userAvatar} where userId=#{userId}
 	</update>
 	<!-- 根据电影名查询电影的评论 -->
 	<select id="queryComments" parameterType="weixin.pea.pojo.Comment" resultType="weixin.pea.pojo.Comment">

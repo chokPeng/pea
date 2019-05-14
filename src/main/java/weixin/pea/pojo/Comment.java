@@ -1,9 +1,7 @@
 package weixin.pea.pojo;
 
 import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 public class Comment {
 	private int commentId;		
 	private int userId;		

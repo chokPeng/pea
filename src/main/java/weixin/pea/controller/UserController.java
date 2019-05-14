@@ -7,9 +7,6 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,14 +32,10 @@ public class UserController extends HttpServlet{
 	UserService userService;
 	//用户注册
 	@RequestMapping(value="/userRegister",method=RequestMethod.POST)
-	public ModelAndView register(User user,HttpServletRequest request,HttpServletResponse response) {
-		HttpSession session=request.getSession();
-		User user1=(User) session.getAttribute("userLogin");
-		System.out.println(session.getId());
-		System.out.println(user1.getUserId());
-		User user2=userService.queryUser(user1.getUserId());
+	public ModelAndView register(User user) {
+		result=userService.userRegister(user);
 		ModelAndView modelAndView=new ModelAndView();
-		if(user2==null) {
+		if(result==1) {
 			userService.userRegister(user);
 			modelAndView.addObject(user);
 			modelAndView.addObject("msg", "注册成功");
@@ -71,18 +64,32 @@ public class UserController extends HttpServlet{
 	//修改用户信息
 	@RequestMapping(value="/updateUserInfo",method=RequestMethod.POST)
 	public ModelAndView alterUserInfo(User user) {
-		System.out.println(user.getUserId());
 		result=userService.updateUserInfo(user);
+		System.out.println(result);
 		ModelAndView modelAndView=new ModelAndView();
-		if(result!=0) {
-			User user2=userService.queryUser(user.getUserId());	//修改用户信息后,返回修改后的用户信息
-			
-			modelAndView.addObject(user2);
+		if(result==1) {
+			User user2=userService.queryUser(user);	//修改用户信息后,返回修改后的用户信息
+			modelAndView.addObject("user",user2);
 			modelAndView.addObject("msg", "修改成功");
 			modelAndView.setView(new MappingJackson2JsonView());			
 		}else {
 			modelAndView.addObject("msg","修改失败");
 		}
+		return modelAndView;
+	}
+	//查询用户信息
+	@RequestMapping(value="/queryUser",method=RequestMethod.POST)
+	public ModelAndView queryUser(User user) {
+		System.out.println(user.getUserId());
+		User user2=userService.queryUser(user);
+		ModelAndView modelAndView=new ModelAndView();
+		if(user2!=null) {
+			modelAndView.addObject(user2);
+			modelAndView.addObject("msg","查询成功");
+		}else {
+			modelAndView.addObject("msg","查询失败");
+		}
+		modelAndView.setView(new MappingJackson2JsonView());
 		return modelAndView;
 	}
 	//添加电影
@@ -93,6 +100,7 @@ public class UserController extends HttpServlet{
 		if (result!=0) {
 			modelAndView.addObject(movie);
 			modelAndView.addObject("msg", "添加成功");
+			modelAndView.setView(new MappingJackson2JsonView());
 		} else {
 			modelAndView.addObject("msg", "添加失败");
 		}
@@ -156,15 +164,18 @@ public class UserController extends HttpServlet{
 //		movie.setAverageScore(totalScore/scoreNumber);
 //		return modelAndView;
 //	}
-	//上传文件
+	//上传用户头像
 	 @RequestMapping(value="/uploadFile",method = RequestMethod.POST)
 	 public  ModelAndView uploadImg(MultipartFile img,User user) throws IOException {
-	    		ModelAndView modelAndView=new ModelAndView();	    		
-	        File f=new File("/Users/pengchunkao/eclipse-workspace/pea/src/main/webapp/image/"+img.getOriginalFilename());
-	        img.transferTo(f);			//写入磁盘
+	    		ModelAndView modelAndView=new ModelAndView();	    	
+	    		/* 因为img.getContentType()返回值为image/jpeg（或者图片的其他类型后缀名，如jpg等等),所以截取第六个字符串后的字符就可以获得图片的后缀名jpeg或者其它后缀名*/
+	    		String uploadFileName=img.getContentType().substring(6);			
+	    		uploadFileName=user.getUserName()+"."+uploadFileName;//设置用户的头像
+	    		user.setUserAvatar("http://localhost:8080/image/"+uploadFileName);
+	        File f=new File("/Users/pengchunkao/image/"+uploadFileName);
+	        img.transferTo(f);							//写入磁盘
 	        String path=f.getAbsolutePath();				//获取文件存储的绝对路径
-	        System.out.println(path);
-	        result=userService.storeFilePath(user);						//存储文件到指定路径
+	        result=userService.storeFilePath(user);		//存储文件到指定路径
 	        if(result!=0) {
 	        	 	modelAndView.addObject("path", path);
 	        	 	modelAndView.addObject("msg", "上传成功");
@@ -172,7 +183,6 @@ public class UserController extends HttpServlet{
 	        }else {
 	        		modelAndView.addObject("msg", "上传失败");
 	        }
-	        System.out.println(modelAndView.toString());
 	        return modelAndView;
-	    }
+   }
 }

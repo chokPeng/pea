@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 	public User userLogin(User user);				//用户登录	
-	public void userRegister(User user);				//用户注册
-	public User queryUser(int userId);					//根据userId查找用户
+	public int userRegister(User user);				//用户注册
+	public User queryUser(User user);					//根据userId查找用户
 	public int updateUserInfo(User user);			//修改用户信息	
 	public LinkedList<Movie> queryMovie(Movie movie);				//查找电影		
 	public int addMovie(Movie movie);				//添加电影

@@ -17,11 +17,11 @@ public class UserServiceImpl implements UserService{
 	public User userLogin(User user) {				//用户登录
 		return userMapper.userLogin(user);
 	}
-	public void userRegister(User user) {			//用户注册
-		userMapper.userRegister(user);
+	public int userRegister(User user) {			//用户注册
+		return userMapper.userRegister(user);
 	}
-	public User queryUser(int userId) {				//查询用户
-		return userMapper.queryUser(userId);
+	public User queryUser(User user) {				//查询用户
+		return userMapper.queryUser(user);
 	}
 	public int  updateUserInfo(User user) {			//修改用户信息
 		return userMapper.updateUserInfo(user);
