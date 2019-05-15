@@ -12,6 +12,7 @@ public class Comment {
 	private String commentContent;		//评论内容
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date commentDate;			//评论时间
+	private int score;
 	public int getCommentId() {
 		return commentId;
 	}
@@ -59,5 +60,11 @@ public class Comment {
 	}
 	public void setUserAvatar(String userAvatar) {
 		this.userAvatar = userAvatar;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
 	}
 }

@@ -10,10 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user where userId= #{userId}
 	</select>
 	<insert id="userRegister"	parameterType="weixin.pea.pojo.User"  >
-		insert into user (userId,userName,userPassword,userSex,userInfo,userAdress,userAvatar) values (#{userId},#{userName},#{userPassword},#{userSex},#{userInfo},#{userAdress},#{userAvatar})
+		insert into user (userId,userName,userPassword) values (#{userId},#{userName},#{userPassword})
 	</insert>
 	<update id="updateUserInfo" parameterType="weixin.pea.pojo.User" >
-		update user set userName=#{userName},userPassword=#{userPassword},userSex=#{userSex},userAvatar=#{userAvatar},userInfo=#{userInfo},userAddress=#{userAddress} where userId=#{userId}
+		update user set userName=#{userName},userPassword=#{userPassword},userSex=#{userSex},userInfo=#{userInfo},userAddress=#{userAddress} where userId=#{userId}
 	</update>
 	<insert id="postComment" parameterType="weixin.pea.pojo.Comment">
 		insert into movieComments (movieName,userId,userName,commentContent,commentDate) values (#{movieName},#{userId},#{userName},#{commentContent},#{commentDate})
@@ -36,6 +36,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	<!-- 根据电影名查询电影的评论 -->
 	<select id="queryComments" parameterType="weixin.pea.pojo.Comment" resultType="weixin.pea.pojo.Comment">
-		select * from movieComments where movieName=#{movieName}
+		select * from movieComments,user where movieName=#{movieName} and user.userId=movieComments.userId
 	</select>
 </mapper>

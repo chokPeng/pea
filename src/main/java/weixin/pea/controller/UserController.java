@@ -36,11 +36,9 @@ public class UserController extends HttpServlet{
 		result=userService.userRegister(user);
 		ModelAndView modelAndView=new ModelAndView();
 		if(result==1) {
-			userService.userRegister(user);
 			modelAndView.addObject(user);
 			modelAndView.addObject("msg", "注册成功");
 			modelAndView.setView(new MappingJackson2JsonView());
-			return modelAndView;
 		}else {
 			modelAndView.addObject("msg", "注册失败");
 		}
