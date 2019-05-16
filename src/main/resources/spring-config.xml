@@ -14,9 +14,6 @@
 		http://www.springframework.org/schema/cache/spring-cache.xsd
 		http://www.springframework.org/schema/tx 
         http://www.springframework.org/schema/tx/spring-tx.xsd ">
-    <!-- 设置使用注解的类所在的包 -->
-    <context:component-scan base-package="weixin.pea">
-    </context:component-scan>
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
@@ -40,6 +37,11 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    	<!--验证器-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!--注入hibernate的验证器-->
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+	</bean>
    <!-- 配置multipart解析器 -->
   <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
     <!-- 使用声明式事务管理方式 -->

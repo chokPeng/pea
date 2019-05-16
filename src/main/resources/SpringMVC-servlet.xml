@@ -27,11 +27,12 @@
      <!-- 使用注解驱动，会自动注册处理器适配器 -->
      <mvc:annotation-driven></mvc:annotation-driven>
     <!-- 设置使用注解的类所在的包 -->
-   <context:component-scan base-package="weixin.pea.controller" >
+   <context:component-scan base-package="weixin.pea.*" >
    </context:component-scan>
      <!-- 配置注解的处理器映射器和处理器适配器 -->  
     <!-- 访问静态资源文件处理器，<mvc:default-servlet-handler/>，没配置这个就访问不了图片，css，js等静态资源-->
 	<mvc:default-servlet-handler/>
+
 <!--     	配置拦截器
 	<mvc:interceptors>
 	<mvc:interceptor>

@@ -1,47 +1,51 @@
 package weixin.pea.controller;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
 import javax.servlet.http.HttpServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-
+import weixin.pea.aop.DataValidate;
 import weixin.pea.pojo.Comment;
 import weixin.pea.pojo.Movie;
 import weixin.pea.pojo.User;
 import weixin.pea.service.UserService;
 @Controller
 public class UserController extends HttpServlet{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	int result;
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	DataValidate dataValidate;			//每注入一个bean就得写多一个Autowired注解
 	//用户注册
 	@RequestMapping(value="/userRegister",method=RequestMethod.POST)
-	public ModelAndView register(User user) {
-		result=userService.userRegister(user);
+	public ModelAndView register(@Validated User user,BindingResult bindingResult) {
 		ModelAndView modelAndView=new ModelAndView();
-		if(result==1) {
-			modelAndView.addObject(user);
-			modelAndView.addObject("msg", "注册成功");
-			modelAndView.setView(new MappingJackson2JsonView());
+		if(bindingResult.hasErrors()) {
+			modelAndView.addObject("msg","注册失败");
+			modelAndView.addObject(dataValidate.getErrors(bindingResult));
 		}else {
-			modelAndView.addObject("msg", "注册失败");
+			result=userService.userRegister(user);
+			if (result!=0) {
+				modelAndView.addObject("msg","注册成功");
+				modelAndView.addObject(user);
+			} else {
+				modelAndView.addObject("msg","注册失败");
+			}
 		}
+		modelAndView.setView(new MappingJackson2JsonView());
 		return modelAndView;
 	}
 	//用户登录
@@ -92,10 +96,11 @@ public class UserController extends HttpServlet{
 	}
 	//添加电影
 	@RequestMapping(value="/addMovie",method=RequestMethod.POST)
-	public  ModelAndView addMovie(Movie movie) {
-		result=userService.addMovie(movie);
+	public  ModelAndView addMovie( Movie movie) {
+		int result1=userService.addMovie(movie);
 		ModelAndView modelAndView=new ModelAndView();
-		if (result!=0) {
+		
+		if (result1!=0) {
 			modelAndView.addObject(movie);
 			modelAndView.addObject("msg", "添加成功");
 			modelAndView.setView(new MappingJackson2JsonView());
@@ -183,4 +188,21 @@ public class UserController extends HttpServlet{
 	        }
 	        return modelAndView;
    }
+	 @RequestMapping(value="/test",method=RequestMethod.POST)
+	 public ModelAndView test(@Validated User user,BindingResult bindingResult) {
+		 ModelAndView modelAndView=new ModelAndView();
+		 if(bindingResult.hasErrors()){    
+			 modelAndView.addObject("msg","注册失败!");
+			 modelAndView.addObject(dataValidate.getErrors(bindingResult));
+		 }else {
+			 result=userService.userRegister(user);
+			 if (result==0) {
+				 modelAndView.addObject("msg","注册失败!");
+			} else {
+				 modelAndView.addObject("msg", "注册成功!");
+			}	
+		 }
+		 modelAndView.setView(new MappingJackson2JsonView());
+		 return modelAndView;	 
+	 }
 }
