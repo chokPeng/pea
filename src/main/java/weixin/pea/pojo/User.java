@@ -38,7 +38,6 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	@NotBlank(message="用户简介不能为空!")
 	public String getUserInfo() {
 		return userInfo;
 	}
